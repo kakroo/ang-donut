@@ -1,0 +1,21 @@
+{
+  "name": "donut",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4",
+    "tslib": "^1.10.0"
+  },
+  "main": "bundles/donut.umd.js",
+  "module": "fesm5/donut.js",
+  "es2015": "fesm2015/donut.js",
+  "esm5": "esm5/donut.js",
+  "esm2015": "esm2015/donut.js",
+  "fesm5": "fesm5/donut.js",
+  "fesm2015": "fesm2015/donut.js",
+  "typings": "donut.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
+  }
+}

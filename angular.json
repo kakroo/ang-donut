@@ -1,0 +1,164 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "donut": {
+      "projectType": "library",
+      "root": "projects/donut",
+      "sourceRoot": "projects/donut/src",
+      "prefix": "ng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/donut/tsconfig.lib.json",
+            "project": "projects/donut/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/donut/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/donut/src/test.ts",
+            "tsConfig": "projects/donut/tsconfig.spec.json",
+            "karmaConfig": "projects/donut/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/donut/tsconfig.lib.json",
+              "projects/donut/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "donut-test": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/donut-test",
+      "sourceRoot": "projects/donut-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/donut-test",
+            "index": "projects/donut-test/src/index.html",
+            "main": "projects/donut-test/src/main.ts",
+            "polyfills": "projects/donut-test/src/polyfills.ts",
+            "tsConfig": "projects/donut-test/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/donut-test/src/favicon.ico",
+              "projects/donut-test/src/assets"
+            ],
+            "styles": [
+              "projects/donut-test/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/donut-test/src/environments/environment.ts",
+                  "with": "projects/donut-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "donut-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "donut-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "donut-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/donut-test/src/test.ts",
+            "polyfills": "projects/donut-test/src/polyfills.ts",
+            "tsConfig": "projects/donut-test/tsconfig.spec.json",
+            "karmaConfig": "projects/donut-test/karma.conf.js",
+            "assets": [
+              "projects/donut-test/src/favicon.ico",
+              "projects/donut-test/src/assets"
+            ],
+            "styles": [
+              "projects/donut-test/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/donut-test/tsconfig.app.json",
+              "projects/donut-test/tsconfig.spec.json",
+              "projects/donut-test/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/donut-test/e2e/protractor.conf.js",
+            "devServerTarget": "donut-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "donut-test:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "donut"
+}
