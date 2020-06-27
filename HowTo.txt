@@ -1,0 +1,13 @@
+ng new ang-donut --create-application=false   -- Create a workspace. THis will be empty
+ng g library donut --prefix=ng   -- this will be our library where the code will reside
+ng g application donut-test    --this will be the tester for our library
+
+To run it we need to do the following
+ng serve donut-test  -- cz the library cant be served(can't it)
+
+Now we want to test run our library, 
+we need to use it in our test app, before that we need to build our library
+
+ng build donut  --this will create a build version of our library under dist folder
+
+Now we import it like a regular node module in donut-test, this is important
