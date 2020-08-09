@@ -1,6 +1,67 @@
-import { __decorate } from "tslib";
-import { Component, Input, ViewChild } from '@angular/core';
-import { DonutService } from './donut.service';
+import { __decorate } from 'tslib';
+import { ɵɵdefineInjectable, Injectable, ViewChild, Input, Component, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+var DonutService = /** @class */ (function () {
+    function DonutService() {
+    }
+    DonutService.prototype.getProcessedData = function (donutData) {
+        this.sum = this.fetchSum(donutData);
+        donutData = this.calculatePercentages(donutData, this.sum);
+        donutData = this.calculateDashArrays(donutData);
+        donutData = this.getOffsets(donutData);
+        return donutData;
+    };
+    DonutService.prototype.calculateDashArrays = function (donutData) {
+        var _this = this;
+        donutData.forEach(function (data) {
+            data.strokeDasharray = _this.getDasharrayString(data.percentage);
+        });
+        return donutData;
+    };
+    DonutService.prototype.calculatePercentages = function (donutData, sum) {
+        var _this = this;
+        donutData.forEach(function (data) {
+            data.percentage = _this.getRoundedPercentage(parseInt(data.value), sum);
+        });
+        return donutData;
+    };
+    DonutService.prototype.fetchSum = function (donutData) {
+        return donutData.map(function (d) { return parseInt(d.value); }).reduce(function (a, b) { return a + b; }, 0);
+    };
+    DonutService.prototype.getRoundedPercentage = function (numerator, denominator) {
+        if (!denominator) {
+            return 0;
+        }
+        return (Math.round(((numerator / denominator) * 100) * 10) / 10);
+    };
+    DonutService.prototype.getDasharrayString = function (dash) {
+        return dash + ' ' + (100 - dash);
+    };
+    DonutService.prototype.getOffsets = function (donutData) {
+        var firstOffset = 0;
+        var sumTillNow = 0;
+        donutData.forEach(function (data, i) {
+            if (i === 0) {
+                data.strokeOffset = 0;
+                sumTillNow = data.percentage;
+            }
+            else {
+                data.strokeOffset = 100 - sumTillNow;
+                sumTillNow += data.percentage;
+            }
+        });
+        return donutData;
+    };
+    DonutService.ɵprov = ɵɵdefineInjectable({ factory: function DonutService_Factory() { return new DonutService(); }, token: DonutService, providedIn: "root" });
+    DonutService = __decorate([
+        Injectable({
+            providedIn: 'root'
+        })
+    ], DonutService);
+    return DonutService;
+}());
+
 var DonutComponent = /** @class */ (function () {
     function DonutComponent(donutService) {
         this.donutService = donutService;
@@ -90,5 +151,27 @@ var DonutComponent = /** @class */ (function () {
     ], DonutComponent);
     return DonutComponent;
 }());
-export { DonutComponent };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9udXQuY29tcG9uZW50LmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5nLWRvbnV0LyIsInNvdXJjZXMiOlsibGliL2RvbnV0LmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLFNBQVMsRUFBVSxLQUFLLEVBQUUsU0FBUyxFQUE2QixNQUFNLGVBQWUsQ0FBQztBQUMvRixPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0saUJBQWlCLENBQUM7QUFRL0M7SUF3Q0Usd0JBQW9CLFlBQTBCO1FBQTFCLGlCQUFZLEdBQVosWUFBWSxDQUFjO0lBQUksQ0FBQztJQTdCMUMsc0JBQUkscUNBQVM7UUFEdEIscUNBQXFDO2FBQzVCLFVBQWMsS0FBYztZQUNuQyxJQUFJLEtBQUssSUFBSSxLQUFLLEtBQUssSUFBSSxFQUFFO2dCQUMzQixJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQzthQUN4QjtpQkFDSTtnQkFDSCxJQUFJLENBQUMsVUFBVSxHQUFHLEtBQUssQ0FBQzthQUN6QjtRQUNILENBQUM7OztPQUFBO0lBQ1Esc0JBQUksK0JBQUc7YUFBUCxVQUFRLEtBQWU7WUFDOUIsSUFBSSxLQUFLLEVBQUU7Z0JBQ1QsSUFBSSxDQUFDLE1BQU0sR0FBRyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQ3ZCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO2FBRXZCO1FBRUgsQ0FBQzs7O09BQUE7SUFJUSxzQkFBSSxzQ0FBVTtRQUR2QixtQkFBbUI7YUFDVixVQUFlLEtBQWE7WUFDbkMsSUFBSSxLQUFLLEVBQUU7Z0JBQ1QsSUFBSSxDQUFDLGNBQWMsR0FBRyxLQUFLLENBQUM7YUFDN0I7aUJBQ0k7Z0JBQ0gsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUM7YUFDNUI7UUFDSCxDQUFDOzs7T0FBQTtJQUtELGlDQUFRLEdBQVI7UUFDRSx3QkFBd0I7UUFDeEIsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUNwRSwrREFBK0Q7UUFDL0QsSUFBSSxDQUFDLFdBQVcsR0FBRyxDQUFDLENBQUM7UUFDckIsSUFBSSxDQUFDLEdBQUcsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLEdBQUcsQ0FBQztRQUNqQyxJQUFJLENBQUMsVUFBVSxHQUFHLEtBQUssQ0FBQztRQUN4QixjQUFjO0lBR2hCLENBQUM7SUFFRCx3Q0FBZSxHQUFmO1FBQ0ksU0FBUztRQUNULElBQUksQ0FBQyxNQUFNLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7UUFDNUQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUMsS0FBSyxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQztJQUU5RCxDQUFDO0lBQ0Qsc0NBQWEsR0FBYjtRQUNFLElBQUksQ0FBQyxTQUFTLEdBQUc7WUFDZixFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsU0FBUyxFQUFFO1lBQzlDLEVBQUUsSUFBSSxFQUFFLE1BQU0sRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLEtBQUssRUFBRSxTQUFTLEVBQUU7WUFDL0MsRUFBRSxJQUFJLEVBQUUsT0FBTyxFQUFFLEtBQUssRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLFNBQVMsRUFBRTtZQUNoRCxFQUFFLElBQUksRUFBRSxPQUFPLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsU0FBUyxFQUFFO1NBQ2pELENBQUM7SUFDSixDQUFDOztnQkEzQmlDLFlBQVk7O0lBL0J6QjtRQUFwQixTQUFTLENBQUMsUUFBUSxDQUFDO2tEQUFvQjtJQUUvQjtRQUFSLEtBQUssRUFBRTttREFPUDtJQUNRO1FBQVIsS0FBSyxFQUFFOzZDQU9QO0lBRVE7UUFBUixLQUFLLEVBQUU7cURBQW9CO0lBRW5CO1FBQVIsS0FBSyxFQUFFO29EQU9QO0lBckNVLGNBQWM7UUFMMUIsU0FBUyxDQUFDO1lBQ1QsUUFBUSxFQUFFLFVBQVU7WUFDcEIseTNEQUFxQzs7U0FFdEMsQ0FBQztPQUNXLGNBQWMsQ0FxRTFCO0lBQUQscUJBQUM7Q0FBQSxBQXJFRCxJQXFFQztTQXJFWSxjQUFjIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBPbkluaXQsIElucHV0LCBWaWV3Q2hpbGQsIEVsZW1lbnRSZWYsIEFmdGVyVmlld0luaXQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IERvbnV0U2VydmljZSB9IGZyb20gJy4vZG9udXQuc2VydmljZSc7XG5pbXBvcnQgeyBEb251dCB9IGZyb20gJy4vZG9udXQubW9kZWwnO1xuXG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICduZy1kb251dCcsXG4gIHRlbXBsYXRlVXJsOiAnLi9kb251dC5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL2RvbnV0LmNvbXBvbmVudC5zY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgRG9udXRDb21wb25lbnQgaW1wbGVtZW50cyBPbkluaXQsIEFmdGVyVmlld0luaXQge1xuXG4gIHB1YmxpYyBzdHJva2VXaWR0aDogbnVtYmVyO1xuICBwdWJsaWMgaW5uZXJMYWJlbFRleHQ6IHN0cmluZztcbiAgcHVibGljIHNob3dMZWdlbmQ6IGJvb2xlYW47XG4gIHB1YmxpYyBzdW06IG51bWJlcjtcbiAgcHVibGljIF9zaG93VG90YWw6IGJvb2xlYW47XG4gIHB1YmxpYyB3aWR0aDogbnVtYmVyO1xuICBwdWJsaWMgaGVpZ2h0OiBudW1iZXI7XG4gIEBWaWV3Q2hpbGQoJ3BhcmVudCcpIHBhcmVudDogRWxlbWVudFJlZjtcbiAgLy8gU2hvdWxkIHRvdGFsIGJlIHNob3duIGluc2lkZSBEb251dFxuICBASW5wdXQoKSBzZXQgc2hvd1RvdGFsKHZhbHVlOiBib29sZWFuKSB7XG4gICAgaWYgKHZhbHVlICYmIHZhbHVlID09PSB0cnVlKSB7XG4gICAgICB0aGlzLl9zaG93VG90YWwgPSB0cnVlO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgIHRoaXMuX3Nob3dUb3RhbCA9IGZhbHNlO1xuICAgIH1cbiAgfVxuICBASW5wdXQoKSBzZXQgZGltKHZhbHVlOiBudW1iZXJbXSkge1xuICAgIGlmICh2YWx1ZSkge1xuICAgICAgdGhpcy5oZWlnaHQgPSB2YWx1ZVswXTtcbiAgICAgIHRoaXMud2lkdGggPSB2YWx1ZVsxXTtcblxuICAgIH1cblxuICB9XG4gIC8vIERhdGEgd2hpY2ggbmVlZHMgdG8gYmUgcmVuZGVyZWRcbiAgQElucHV0KCkgZG9udXREYXRhOiBEb251dFtdO1xuICAvLyBJbm5lciBMYWJlbCB0ZXh0XG4gIEBJbnB1dCgpIHNldCBpbm5lckxhYmVsKHZhbHVlOiBzdHJpbmcpIHtcbiAgICBpZiAodmFsdWUpIHtcbiAgICAgIHRoaXMuaW5uZXJMYWJlbFRleHQgPSB2YWx1ZTtcbiAgICB9XG4gICAgZWxzZSB7XG4gICAgICB0aGlzLmlubmVyTGFiZWxUZXh0ID0gbnVsbDtcbiAgICB9XG4gIH1cblxuXG4gIGNvbnN0cnVjdG9yKHByaXZhdGUgZG9udXRTZXJ2aWNlOiBEb251dFNlcnZpY2UpIHsgfVxuXG4gIG5nT25Jbml0KCkge1xuICAgIC8vIHRoaXMuZmV0Y2hGYWtlRGF0YSgpO1xuICAgIHRoaXMuZG9udXREYXRhID0gdGhpcy5kb251dFNlcnZpY2UuZ2V0UHJvY2Vzc2VkRGF0YSh0aGlzLmRvbnV0RGF0YSk7XG4gICAgLy9TZXR0aW5ncyBTdGFydCAvLyBOZWVkIHRvIGJpbmQgdGhlc2UgdG8gaW5wdXQgdmFyaWFibGVzIGxhdGVyXG4gICAgdGhpcy5zdHJva2VXaWR0aCA9IDM7XG4gICAgdGhpcy5zdW0gPSB0aGlzLmRvbnV0U2VydmljZS5zdW07XG4gICAgdGhpcy5zaG93TGVnZW5kID0gZmFsc2U7XG4gICAgLy9TZXR0aW5ncyBFbmRcblxuICBcbiAgfVxuXG4gIG5nQWZ0ZXJWaWV3SW5pdCgpIHtcbiAgICAgIC8vU2V0IERpbVxuICAgICAgdGhpcy5wYXJlbnQubmF0aXZlRWxlbWVudC5zdHlsZS5oZWlnaHQgPSB0aGlzLmhlaWdodCArICdweCc7XG4gICAgICB0aGlzLnBhcmVudC5uYXRpdmVFbGVtZW50LnN0eWxlLndpZHRoID0gdGhpcy53aWR0aCArICdweCc7XG5cbiAgfVxuICBmZXRjaEZha2VEYXRhKCkge1xuICAgIHRoaXMuZG9udXREYXRhID0gW1xuICAgICAgeyBuYW1lOiAnUmVkJywgdmFsdWU6ICcyMCcsIGNvbG9yOiAnI0UyNTMyNScgfSxcbiAgICAgIHsgbmFtZTogJ0JsdWUnLCB2YWx1ZTogJzMwJywgY29sb3I6ICcjNjA2NENGJyB9LFxuICAgICAgeyBuYW1lOiAnQmxhY2snLCB2YWx1ZTogJzEwJywgY29sb3I6ICcjNUE1QzU5JyB9LFxuICAgICAgeyBuYW1lOiAnR3JlZW4nLCB2YWx1ZTogJzQwJywgY29sb3I6ICcjNTBGRDFEJyB9XG4gICAgXTtcbiAgfVxuXG59XG4iXX0=
+
+var DonutModule = /** @class */ (function () {
+    function DonutModule() {
+    }
+    DonutModule = __decorate([
+        NgModule({
+            declarations: [DonutComponent],
+            imports: [CommonModule],
+            exports: [DonutComponent]
+        })
+    ], DonutModule);
+    return DonutModule;
+}());
+
+/*
+ * Public API Surface of donut
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+export { DonutComponent, DonutModule, DonutService };
+//# sourceMappingURL=ang-donut.js.map

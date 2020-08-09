@@ -1,21 +1,36 @@
 {
-  "name": "donut",
+  "name": "ang-donut",
+  "description": "",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.1.4",
     "@angular/core": "^9.1.4",
     "tslib": "^1.10.0"
   },
-  "main": "bundles/donut.umd.js",
-  "module": "fesm5/donut.js",
-  "es2015": "fesm2015/donut.js",
-  "esm5": "esm5/donut.js",
-  "esm2015": "esm2015/donut.js",
-  "fesm5": "fesm5/donut.js",
-  "fesm2015": "fesm2015/donut.js",
-  "typings": "donut.d.ts",
-  "sideEffects": false,
-  "scripts": {
-    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
-  }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkakroo/ang-donut"
+  },
+  "keywords": [
+    "Angular",
+    "Charts",
+    "Donut",
+    "Javascript"
+  ],
+  "author": "Karan Kakroo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kkakroo/ang-donut/issues"
+  },
+  "homepage": "https://github.com/kkakroo/ang-donut",
+  "main": "bundles/ang-donut.umd.js",
+  "module": "fesm5/ang-donut.js",
+  "es2015": "fesm2015/ang-donut.js",
+  "esm5": "esm5/ang-donut.js",
+  "esm2015": "esm2015/ang-donut.js",
+  "fesm5": "fesm5/ang-donut.js",
+  "fesm2015": "fesm2015/ang-donut.js",
+  "typings": "ang-donut.d.ts",
+  "metadata": "ang-donut.metadata.json",
+  "sideEffects": false
 }

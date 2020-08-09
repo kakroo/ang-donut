@@ -1,9 +1,21 @@
 {
-  "name": "donut",
+  "name": "ang-donut",
+  "description": "",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.1.4",
     "@angular/core": "^9.1.4",
     "tslib": "^1.10.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkakroo/ang-donut"
+  },
+  "keywords": ["Angular", "Charts","Donut","Javascript"],
+  "author": "Karan Kakroo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kkakroo/ang-donut/issues"
+  },
+  "homepage": "https://github.com/kkakroo/ang-donut"
 }

@@ -1,7 +1,6 @@
 import { OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { DonutService } from './donut.service';
 import { Donut } from './donut.model';
-import * as i0 from "@angular/core";
 export declare class DonutComponent implements OnInit, AfterViewInit {
     private donutService;
     strokeWidth: number;
@@ -20,6 +19,4 @@ export declare class DonutComponent implements OnInit, AfterViewInit {
     ngOnInit(): void;
     ngAfterViewInit(): void;
     fetchFakeData(): void;
-    static ɵfac: i0.ɵɵFactoryDef<DonutComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDefWithMeta<DonutComponent, "ng-donut", never, { "showTotal": "showTotal"; "dim": "dim"; "donutData": "donutData"; "innerLabel": "innerLabel"; }, {}, never, never>;
 }
