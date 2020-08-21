@@ -1,6 +1,6 @@
 <div #parent>
     <figure class='figure-class'>
-      <div class="figure-content" fxFlex='57%'>
+      <div class="figure-content" fxFlex='65%'>
         <svg width="100%" height="100%" viewBox="0 0 42 42" class="donut" aria-labelledby="beers-title beers-desc"
           role="img">
           <circle class="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="#fff" role="presentation"></circle>
@@ -22,13 +22,14 @@
           </g>
         </svg>
       </div>
-      <div *ngIf="_showLegend" class="figure-key" fxFlex='43%'>
+      <div *ngIf="_showLegend" class="figure-key" fxFlex='35%'>
       <figcaption>
         <ul class="figure-key-list" aria-hidden="true" role="presentation">
           <li *ngFor="let data of donutData;">
-            <span class="shape-circle" [style.background-color]="data.color"></span><b>{{data.name}} </b>
+            <span class="shape-circle" [style.background-color]="data.color"></span>
+            <b>{{data.name}} </b>
             <span class="donut-data-count-percentage">
-              {{data.value}}({{data.percentage}}%)
+              - {{data.value}} ({{data.percentage}}%)
             </span>
           </li>
         </ul>
