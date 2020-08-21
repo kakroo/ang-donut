@@ -1,7 +1,7 @@
 {
   "name": "ang-donut",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "peerDependencies": {
     "@angular/common": "^9.1.4",
     "@angular/core": "^9.1.4",
