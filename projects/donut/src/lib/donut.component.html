@@ -22,7 +22,7 @@
           </g>
         </svg>
       </div>
-      <div class="figure-key" fxFlex='43%'>
+      <div *ngIf="_showLegend" class="figure-key" fxFlex='43%'>
       <figcaption>
         <ul class="figure-key-list" aria-hidden="true" role="presentation">
           <li *ngFor="let data of donutData;">

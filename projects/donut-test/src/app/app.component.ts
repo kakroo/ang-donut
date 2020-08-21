@@ -3,12 +3,13 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'] 
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'donut-test';
   innerLabel = 'Colors';
-  dim = [500, 500]; 
+  legend = true;
+  dim = [500, 500];
   showTotal = true;
   donutData = [
     { name: 'Red', value: '30', color: '#E25325' },

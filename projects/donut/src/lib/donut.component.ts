@@ -11,7 +11,7 @@ export class DonutComponent implements OnInit, AfterViewInit {
 
   public strokeWidth: number;
   public innerLabelText: string;
-  public showLegend: boolean;
+  public _showLegend: boolean;
   public sum: number;
   public _showTotal: boolean;
   public width: number;
@@ -24,6 +24,14 @@ export class DonutComponent implements OnInit, AfterViewInit {
     }
     else {
       this._showTotal = false;
+    }
+  }
+  @Input() set showLegend(value: boolean) {
+    if (value && value === true) {
+      this._showLegend = true;
+    }
+    else {
+      this._showLegend = false;
     }
   }
   @Input() set dim(value: number[]) {
@@ -55,7 +63,7 @@ export class DonutComponent implements OnInit, AfterViewInit {
     //Settings Start // Need to bind these to input variables later
     this.strokeWidth = 3;
     this.sum = this.donutService.sum;
-    this.showLegend = false;
+    // this.showLegend = false;
     //Settings End
 
   
