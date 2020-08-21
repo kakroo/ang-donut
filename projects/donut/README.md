@@ -3,13 +3,14 @@
 A simple donut in [angular](https://angular.io/).
 
 ## Getting Started
-To use ang-donut in your project install it via [npm](https://www.npmjs.com/package/ang-donut):
+To use ang-donut in your project install it via [npm](https://www.npmjs.com/package/ang-donut)
+Live demo [here](https://stackblitz.com/edit/angdonutdemo)
 
->Install ang-donut
+### Install ang-donut
 
 `npm i ang-donut`
 
->In *app.module.ts*
+### In *app.module.ts*
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,7 @@ import { DonutModule } from 'ang-donut';
 export class AppModule { }
 ```
 
->In *app.component.html*
+### In *app.component.html*
 
 ```html
 <ng-donut 
@@ -45,7 +46,7 @@ export class AppModule { }
 </ng-donut>
 ```
 
->In *app.component.ts*
+### In *app.component.ts*
 
 ```typescript
 import { Component } from '@angular/core';
