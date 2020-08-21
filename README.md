@@ -3,7 +3,8 @@
 A simple donut in [angular](https://angular.io/).
 
 ## Getting Started
-To use ang-donut in your project install it via [npm](https://www.npmjs.com/package/ang-donut)
+To use ang-donut in your project install it via [npm](https://www.npmjs.com/package/ang-donut).
+
 Live demo [here](https://stackblitz.com/edit/angdonutdemo)
 
 ### Install ang-donut
